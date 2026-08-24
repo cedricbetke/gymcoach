@@ -1,9 +1,9 @@
 # ============================================================
 # GymCoach - Compose PROD
 # ============================================================
-# Stack complète : Next.js + Postgres.
-# Nginx reverse proxy + Certbot HTTPS sont déjà en place sur le VPS,
-# donc l'app expose seulement 127.0.0.1:3000 (proxypass Nginx).
+# Complete stack: Next.js + Postgres.
+# The app is exposed directly on host port 3030 for LAN access. When placing
+# it behind HTTPS later, set NEXTAUTH_URL accordingly and keep secure cookies.
 #
 # Usage :
 #   docker compose -f docker-compose.prod.yml up -d --build
@@ -59,6 +59,7 @@ services:
       KICONNECT_API_KEY: ${KICONNECT_API_KEY}
       KICONNECT_MODEL: ${KICONNECT_MODEL}
       NEXTAUTH_URL: ${NEXTAUTH_URL}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-true}
       MCP_PUBLIC_URL: ${MCP_PUBLIC_URL:-}
       NODE_ENV: production
       # Progress-photo files (issue #269): kept on the named volume below so
