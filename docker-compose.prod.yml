@@ -73,9 +73,9 @@ services:
     command: >
       sh -c "node node_modules/prisma/build/index.js migrate deploy && node server.js"
     ports:
-      # Bind local uniquement, Nginx fait le reverse proxy en frontal.
-      # Port hôte 3010 (3000 est pris par lead-radar sur le VPS partagé).
-      - '127.0.0.1:3010:3000'
+      # Expose GymCoach directly on the Docker host's LAN interfaces.
+      # Host port 3030 maps to the Next.js server on container port 3000.
+      - '3030:3000'
 
   # Run-once demo seeder (public demo only): resets the demo account to the
   # rich deterministic dataset (12 weeks of sessions, bodyweight trend, a
