@@ -32,6 +32,8 @@ describe('lib/llm provider resolution', () => {
       expect(resolveProviderId()).toBe('openrouter');
       process.env.LLM_PROVIDER = 'codex-lb';
       expect(resolveProviderId()).toBe('codex-lb');
+      process.env.LLM_PROVIDER = 'kiconnect';
+      expect(resolveProviderId()).toBe('kiconnect');
       process.env.LLM_PROVIDER = 'demo';
       expect(resolveProviderId()).toBe('demo');
     });
@@ -45,6 +47,8 @@ describe('lib/llm provider resolution', () => {
       expect(resolveProviderId()).toBe('codex-lb');
       process.env.LLM_PROVIDER = 'AnThRoPiC';
       expect(resolveProviderId()).toBe('anthropic');
+      process.env.LLM_PROVIDER = 'KICONNECT';
+      expect(resolveProviderId()).toBe('kiconnect');
     });
 
     it('trims surrounding whitespace', () => {
@@ -54,6 +58,8 @@ describe('lib/llm provider resolution', () => {
       expect(resolveProviderId()).toBe('openrouter');
       process.env.LLM_PROVIDER = '  codexlb  ';
       expect(resolveProviderId()).toBe('codex-lb');
+      process.env.LLM_PROVIDER = '  kiconnect  ';
+      expect(resolveProviderId()).toBe('kiconnect');
     });
 
     it('falls back to anthropic for an unknown value', () => {
@@ -75,6 +81,8 @@ describe('lib/llm provider resolution', () => {
       expect(getLlmProvider().id).toBe('openrouter');
       process.env.LLM_PROVIDER = 'codex-lb';
       expect(getLlmProvider().id).toBe('codex-lb');
+      process.env.LLM_PROVIDER = 'kiconnect';
+      expect(getLlmProvider().id).toBe('kiconnect');
       process.env.LLM_PROVIDER = 'demo';
       expect(getLlmProvider().id).toBe('demo');
     });

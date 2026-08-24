@@ -37,6 +37,9 @@ const ENV_KEYS = [
   'CODEX_LB_API_KEY',
   'CODEX_LB_BASE_URL',
   'CODEX_LB_MODEL',
+  'KICONNECT_API_KEY',
+  'KICONNECT_BASE_URL',
+  'KICONNECT_MODEL',
 ] as const;
 
 const savedEnv: Record<string, string | undefined> = {};
@@ -71,6 +74,12 @@ describe('provider selection', () => {
     process.env.LLM_PROVIDER = 'CODEX_LB';
     expect(resolveProviderId()).toBe('codex-lb');
     expect(getLlmProvider().id).toBe('codex-lb');
+  });
+
+  it('selects kiconnect when LLM_PROVIDER=kiconnect (case-insensitive)', () => {
+    process.env.LLM_PROVIDER = 'KICONNECT';
+    expect(resolveProviderId()).toBe('kiconnect');
+    expect(getLlmProvider().id).toBe('kiconnect');
   });
 
   it('falls back to anthropic for an unknown value', () => {
