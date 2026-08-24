@@ -2,8 +2,9 @@
 # GymCoach - Compose PROD
 # ============================================================
 # Complete stack: Next.js + Postgres.
-# The app is exposed directly on host port 3030 for LAN access. When placing
-# it behind HTTPS later, set NEXTAUTH_URL accordingly and keep secure cookies.
+# The app is exposed directly on host port 3030 for HTTP LAN access. When
+# placing it behind HTTPS later, set NEXTAUTH_URL accordingly and enable
+# secure cookies with SESSION_COOKIE_SECURE=true.
 #
 # Usage :
 #   docker compose -f docker-compose.prod.yml up -d --build
@@ -59,7 +60,7 @@ services:
       KICONNECT_API_KEY: ${KICONNECT_API_KEY}
       KICONNECT_MODEL: ${KICONNECT_MODEL}
       NEXTAUTH_URL: ${NEXTAUTH_URL}
-      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-true}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-false}
       MCP_PUBLIC_URL: ${MCP_PUBLIC_URL:-}
       NODE_ENV: production
       # Progress-photo files (issue #269): kept on the named volume below so
